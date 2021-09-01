@@ -1,10 +1,10 @@
 // import account.js into atm.js file
 
-const account = require('./account');
+let {pin, balance} = require('./account');
 
 // user validates their pin at the atm
-function validatePin(account, pinNumber) {
-    if (pinNumber === account.pin) {
+function validatePin(pinNumber) {
+    if (pinNumber === pin) {
         return true;
     } else {
         return false;
@@ -12,35 +12,34 @@ function validatePin(account, pinNumber) {
 }
 
 // if user wants to see their balance they can request the balance
-function getBalance(account) {
-    return account.balance;
+function getBalance() {
+    return balance;
 }
 
 // user can withdraw money after their pin has been validated
-function withdraw(account, ammount) {
-    if(account.balance === 0){
+function withdraw(ammount) {
+    if(balance === 0){
         return `You have insufficient funds.`
-    }
-
-    if (ammount > account.balance) {
+    }else if (ammount > balance) {
         return `You cannot overwithdraw`
+    } else {
+
+        let new_balance = balance - ammount;
+
+        return newBalance(new_balance)
     }
-
-    let new_balance = account.balance - ammount;
-
-    return newBalance(account, new_balance)
 }
 
-function newBalance(account, ammount) {
-    account.balance = ammount;
-    return account.balance;
+function newBalance(ammount) {
+    balance = ammount;
+    return `Your new balance is ${balance}`;
 }
 
 // user can deposit cash into their account
-function deposit(account, ammount) {
-    let new_balance = account.balance + ammount;
+function deposit(ammount) {
+    let new_balance = balance + ammount;
 
-    return newBalance(account, new_balance);
+    return newBalance(new_balance);
 }
 
 module.exports = {

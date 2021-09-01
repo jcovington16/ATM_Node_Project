@@ -7,7 +7,7 @@ const user_prompt = require('prompt-sync')();
 
 function app() {
     let pinNum = parseInt(user_prompt("Please enter your pin number: "))
-    let results = validate(account, pinNum)
+    let results = validate(pinNum)
 
     switch(results) {
         case true:
@@ -35,22 +35,29 @@ function mainMenu() {
 
     switch(input) {
         case "1": // get balance
-            results = balance(account)
+            results = balance()
             console.log(`Your balance is ${results}\n`);
             mainMenu();
             break;
+
         case "2": // withdraw from account
             console.log("How much would you like to withdraw?\n");
-            let amount = user_prompt() + '\n';
-            results = withdraw(account, amount);
-            console.log(`You withdrew ${amount}.\n`);
+            let amount = parseInt(user_prompt()) + '\n';
+            results = withdraw(amount) + '\n';
+            console.log(results);
             mainMenu();
             break;
+
         case "3": // deposite into account
-            console.log('deposit');
+            console.log("How much would you like to deposit?\n");
+            let added_amount = parseInt(user_prompt());
+            let despoiste_amount = deposit(added_amount);
+            console.log(despoiste_amount)
+            mainMenu();
             break;
+            
         case "4":
-            console.log('exit');
+            console.log('exiting...');
             break;
     }
 
