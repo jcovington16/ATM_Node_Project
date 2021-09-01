@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jcovington16/ATM_Node_Project/issues"
   },
-  "homepage": "https://github.com/jcovington16/ATM_Node_Project#readme"
+  "homepage": "https://github.com/jcovington16/ATM_Node_Project#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
 }
