@@ -1,5 +1,4 @@
 // import account.js into atm.js file
-
 let {pin, balance} = require('./account');
 
 // user validates their pin at the atm

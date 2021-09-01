@@ -1,12 +1,13 @@
 "use strict"
 
-const account = require('./account');
 const {validate, balance, withdraw, deposit} =  require('./atm');
 
 const user_prompt = require('prompt-sync')();
+let tries = 3
 
 function app() {
     let pinNum = parseInt(user_prompt("Please enter your pin number: "))
+
     let results = validate(pinNum)
 
     switch(results) {
@@ -16,13 +17,20 @@ function app() {
 
         case false:
             console.error(`Your pin ${pinNum} is incorrect`)
+            if (tries === 0) {
+                console.log('You ran out of attempts. Exiting...')
+                return
+            }else{
+                tries -= 1
+            } 
+            
             app();
             break;
         
-        // default:
-        //     console.log('Please input a proper pin');
-        //     app();
-        //     break;
+        default:
+            console.log('Please input a proper pin');
+            app();
+            break;
     }
 }
 
@@ -55,7 +63,7 @@ function mainMenu() {
             console.log(despoiste_amount)
             mainMenu();
             break;
-            
+
         case "4":
             console.log('exiting...');
             break;
