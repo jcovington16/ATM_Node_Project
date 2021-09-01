@@ -18,6 +18,14 @@ function getBalance(account) {
 
 // user can withdraw money after their pin has been validated
 function withdraw(account, ammount) {
+    if(account.balance === 0){
+        return `You have insufficient funds.`
+    }
+
+    if (ammount > account.balance) {
+        return `You cannot overwithdraw`
+    }
+
     let new_balance = account.balance - ammount;
 
     return newBalance(account, new_balance)
